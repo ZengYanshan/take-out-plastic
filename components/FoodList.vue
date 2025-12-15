@@ -267,22 +267,19 @@
 			    
 			    // 两个弹窗都确认后的逻辑
 			    console.log('用户确认贷款并支付');
-			    uni.showToast({
-			      title: '支付成功！',
-			      icon: 'success'
-			    });
+			    this.onConfirm();
 			    
 			  } catch (error) {
 			    // 用户取消支付
-			    if (error.message === '用户取消') {
-			      uni.showToast({
-			        title: '已取消支付',
-			        icon: 'none'
-			      });
-			    }
 			  }
 			},
-
+			onConfirm() {
+				uni.showModal({
+					title: '系统提示',
+					content: '贷款并不会真的发生，因为这不是现实世界的外卖APP。',
+					confirmColor: "#f7931e"
+				});
+			},
 			async onClear() {
 				await this.$store.dispatch('cart/clearCart');
 			}

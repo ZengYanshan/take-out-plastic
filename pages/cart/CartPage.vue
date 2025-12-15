@@ -47,19 +47,24 @@
 		<!-- 底部结算栏 -->
 		<view v-if="groupedCart.length > 0" class="bottom-bar">
 			<text class="total-price">总价: ¥{{ totalPrice }}</text>
-			<button class="pay-btn" @click="goToPay">去支付</button>
+			<button class="pay-btn" @click="gotoPay(totalPrice)">去支付</button>
 		</view>
 	</view>
+	
+	<!-- 支付弹窗 -->
+	<custom-modal-queue ref="modalQueue" />
 </template>
 
 <script>
 	import SHOPS from '@/static/data/shops.js';
 	import FOODS from '@/static/data/foods.js';
 	import FoodCountController from '@/components/FoodCountController.vue';
+	import CustomModalQueue from '@/components/CustomModalQueue.vue';
 
 	export default {
 		components: {
-			FoodCountController
+			FoodCountController,
+			CustomModalQueue
 		},
 		computed: {
 			groupedCart() {
@@ -146,9 +151,41 @@
 			},
 
 			// 去支付
-			goToPay() {
-				// TODO 支付
-			}
+			async gotoPay(totalPrice) {
+			  try {
+			    // 第一个弹窗
+			    const firstResult = await this.$refs.modalQueue.showModal({
+			      title: '支付提示',
+			      content: `支付降解时间：${totalPrice}年`,
+			      confirmText: '下一步',
+			      cancelText: '取消支付',
+			      confirmColor: '#f7931e'
+			    });
+			    
+			    // 第二个弹窗（只有第一个弹窗确认后才会执行）
+			    const secondResult = await this.$refs.modalQueue.showModal({
+			      title: '贷款确认',
+			      content: `您的余额不足！<br>推荐您使用贷款：<br>是否向地球贷款${totalPrice}年？`,
+			      confirmText: '立即贷款',
+			      cancelText: '放弃支付',
+			      confirmColor: '#f7931e'
+			    });
+			    
+			    // 两个弹窗都确认后的逻辑
+			    console.log('用户确认贷款并支付');
+			    this.onConfirm();
+			    
+			  } catch (error) {
+			    // 用户取消支付
+			  }
+			},
+			onConfirm() {
+				uni.showModal({
+					title: '系统提示',
+					content: '贷款并不会真的发生，因为这不是现实世界的外卖APP。',
+					confirmColor: "#f7931e"
+				});
+			},
 		}
 	};
 </script>
