@@ -126,7 +126,7 @@
 	.shop-info-wrapper {
 		display: flex;
 		background-color: transparent;
-		padding: 24rpx 24rpx 0rpx;
+		padding: 28rpx 24rpx 0rpx;
 		margin-bottom: 10rpx;
 	}
 	
