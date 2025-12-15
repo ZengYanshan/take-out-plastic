@@ -12,8 +12,8 @@
 		</scroll-view>
 
 		<!-- 右侧商品列表 -->
-		<scroll-view class="food-container" scroll-y scroll-with-animation enhanced="true" show-scrollbar="{{false}}" :ref="foodContainer"
-			:scroll-into-view="scrollIntoView" @scroll="handleScroll">
+		<scroll-view class="food-container" scroll-y scroll-with-animation enhanced="true" show-scrollbar="{{false}}"
+			:ref="foodContainer" :scroll-into-view="scrollIntoView" @scroll="handleScroll">
 			<view v-for="(category, idx) in foodsCategorizedInShop" :key="idx" :ref="'category-' + idx"
 				:id="'category-' + idx">
 				<!-- 分类名称 -->
@@ -44,7 +44,7 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="food-list-placeholder"></view>
 		</scroll-view>
 
@@ -59,6 +59,9 @@
 	<food-detail ref="foodDetail" :visible="foodDetailShow" :current-food="currentFood" @hide='hideFoodDetail'
 		@add="onAdd" />
 
+	<!-- 支付弹窗 -->
+	<custom-modal-queue ref="modalQueue" />
+
 </template>
 
 <script>
@@ -66,6 +69,7 @@
 	import FoodCountController from '@/components/FoodCountController.vue';
 	import FoodDetail from '@/components/FoodDetail.vue';
 	import Bubble from '@/components/Bubble.vue';
+	import CustomModalQueue from '@/components/CustomModalQueue.vue';
 	import FOODS from '@/static/data/foods.js';
 
 	export default {
@@ -91,7 +95,8 @@
 				scrollIntoView: '', // 用于 scroll-into-view 的 id
 				scrollTimeout: null,
 				currentFood: {},
-				foodDetailShow: false
+				foodDetailShow: false,
+				customModalShow: false
 			};
 		},
 		mounted() {
@@ -240,10 +245,44 @@
 					foodId: food.id
 				});
 			},
-			onPay(totalPrice) {
-				// TODO 处理支付逻辑
-				console.log('支付金额:', totalPrice);
+			async onPay(totalPrice) {
+			  try {
+			    // 第一个弹窗
+			    const firstResult = await this.$refs.modalQueue.showModal({
+			      title: '支付提示',
+			      content: `支付降解时间：${totalPrice}年`,
+			      confirmText: '下一步',
+			      cancelText: '取消支付',
+			      confirmColor: '#f7931e'
+			    });
+			    
+			    // 第二个弹窗（只有第一个弹窗确认后才会执行）
+			    const secondResult = await this.$refs.modalQueue.showModal({
+			      title: '贷款确认',
+			      content: `您的余额不足！<br>推荐您使用贷款：<br>是否向地球贷款${totalPrice}年？`,
+			      confirmText: '立即贷款',
+			      cancelText: '放弃支付',
+			      confirmColor: '#f7931e'
+			    });
+			    
+			    // 两个弹窗都确认后的逻辑
+			    console.log('用户确认贷款并支付');
+			    uni.showToast({
+			      title: '支付成功！',
+			      icon: 'success'
+			    });
+			    
+			  } catch (error) {
+			    // 用户取消支付
+			    if (error.message === '用户取消') {
+			      uni.showToast({
+			        title: '已取消支付',
+			        icon: 'none'
+			      });
+			    }
+			  }
 			},
+
 			async onClear() {
 				await this.$store.dispatch('cart/clearCart');
 			}
@@ -252,7 +291,8 @@
 			Bubble,
 			BottomCart,
 			FoodCountController,
-			FoodDetail
+			FoodDetail,
+			CustomModalQueue
 		}
 	};
 </script>
@@ -352,7 +392,7 @@
 		align-items: center;
 		justify-content: flex-end;
 	}
-	
+
 	.food-list-placeholder {
 		width: 100%;
 		height: 100rpx;
