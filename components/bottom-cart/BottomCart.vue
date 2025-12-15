@@ -32,7 +32,7 @@
 			</view>
 		</view>
 
-		<!-- TODO 动画小球 -->
+		<!-- TODO 动画小球 
 		<view class="ball-container">
 			<view v-for="(ball,index) in balls" :key="index">
 				<transition @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop">
@@ -41,7 +41,7 @@
 					</view>
 				</transition>
 			</view>
-		</view>
+		</view>-->
 
 		<bottom-cart-list :visible='listShow' :selected-foods='selectedFoods' @hide='hideList' @add="onAdd" @sub='onSub'
 			@clear="onClear" @click-food="onClickFood" />
