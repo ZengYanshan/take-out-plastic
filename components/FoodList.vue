@@ -37,10 +37,12 @@
 								<!-- <text v-if="food.oldPrice" class="old">¥{{ food.oldPrice }}</text> -->
 							</view>
 						</view>
-						<!-- 加减号 -->
-						<view class="food-count-controller-wrapper">
-							<food-count-controller @add='onAdd' @sub='onSub' :food='food' />
-						</view>
+						
+					</view>
+					
+					<!-- 加减号 -->
+					<view class="food-count-controller-wrapper">
+						<food-count-controller @add='onAdd' @sub='onSub' :food='food' />
 					</view>
 				</view>
 			</view>
@@ -335,18 +337,17 @@
 	}
 
 	.category-title {
-		padding: 20rpx 0;
+		margin: 20rpx 4rpx;
 		font-size: 32rpx;
 		font-weight: bold;
 	}
 
 	.food-item {
-		display: flex;
-		flex-direction: column;
-		margin-bottom: 30rpx;
+		margin-bottom: 20rpx;
 		padding: 20rpx;
-		background: white;
-		border-radius: 10rpx;
+		background: #fff;
+		border-radius: 8rpx;
+		position: relative;
 		/* box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05); */
 	}
 
@@ -364,30 +365,33 @@
 
 	.food-item .food-info {
 		flex: 1;
+		
+		height: 160rpx;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 
-	.food-item .name {
-		font-size: 30rpx;
+	.food-info .name {
+		line-height: 36rpx;
+		font-size: 32rpx;
+		font-weight: bold;
 		color: #333;
 		margin-bottom: 10rpx;
 	}
 
-	.food-item .count {
-		margin-right: 15rpx;
-	}
-
-	.food-item .price {
-		display: flex;
-		align-items: center;
-		font-size: 32rpx;
+	.food-info .price {
+		font-size: 36rpx;
+		font-weight: bold;
 		color: #FF5A5F;
-		margin-right: 10rpx;
+		/* margin-right: 10rpx; */
 	}
 
 	.food-count-controller-wrapper {
-		display: flex;
-		align-items: center;
-		justify-content: flex-end;
+		position: absolute;
+		right: 20rpx;
+		bottom: 20rpx;
+		z-index: 2;
 	}
 
 	.food-list-placeholder {

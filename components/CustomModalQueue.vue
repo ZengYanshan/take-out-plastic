@@ -131,7 +131,7 @@
 	}
 
 	.title {
-		font-size: 32rpx;
+		font-size: 36rpx;
 		font-weight: bold;
 		text-align: center;
 		flex: 1;
@@ -143,7 +143,7 @@
 		padding: 20rpx 40rpx;
 		max-height: 50vh;
 		overflow-y: auto;
-		font-size: 30rpx;
+		font-size: 32rpx;
 		line-height: 1.6;
 		color: #666;
 	}

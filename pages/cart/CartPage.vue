@@ -22,7 +22,7 @@
 				<view class="shop-header" @click="goToShopDetail(shopGroup.shop.id)">
 					<image :src="shopGroup.shop.image" class="shop-image" />
 					<text class="shop-name">{{ shopGroup.shop.name }}</text>
-					<text class="delivery-fee">配送费: ¥{{ shopGroup.shop.deliveryFee }}</text>
+					<text class="delivery-fee">外包装降解另需{{ shopGroup.shop.deliveryFee }}年</text>
 				</view>
 
 				<!-- 食物列表 -->
@@ -32,7 +32,7 @@
 						<image :src="food.image" class="food-image" mode="aspectFill" />
 						<view class="food-info">
 							<text class="food-name">{{ food.name }}</text>
-							<text class="food-price">¥{{ food.price }}</text>
+							<text class="food-price">{{ food.price*food.count }}年</text>
 							<!-- <text class="food-desc">{{ food.description }}</text> -->
 						</view>
 						<view class="food-count">
@@ -45,12 +45,24 @@
 		</scroll-view>
 
 		<!-- 底部结算栏 -->
-		<view v-if="groupedCart.length > 0" class="bottom-bar">
-			<text class="total-price">总价: ¥{{ totalPrice }}</text>
-			<button class="pay-btn" @click="gotoPay(totalPrice)">去支付</button>
+		<view v-if="groupedCart.length > 0" class="bottom-bar content">
+			<view class="content-left">
+				<!-- 总价 -->
+				<view class="total-price-wrapper">
+					<text class="total-price" :class="{'highlight': totalPrice > 0}">
+						{{ totalPrice }}年
+					</text>
+					<!-- 配送费 -->
+					<text class="total-delivery-fee">包装降解另需{{ totalDeliveryFee }}年</text>
+				</view>
+				<!-- <text class="total-price-row">总降解时间: <text class="total-price">{{ totalPrice }}年</text></text> -->
+			</view>
+			<view class="content-right">
+				<view class="pay-btn" @click="gotoPay(totalPrice)">去支付</view>
+			</view>
 		</view>
 	</view>
-	
+
 	<!-- 支付弹窗 -->
 	<custom-modal-queue ref="modalQueue" />
 </template>
@@ -107,7 +119,13 @@
 					shopGroup.foods.reduce(
 						(sum, food) => sum + food.price * food.count,
 						0
-					) + shopGroup.shop.deliveryFee,
+					),
+					0
+				);
+			},
+			totalDeliveryFee() {
+				return this.groupedCart.reduce(
+					(total, shopGroup) => total + shopGroup.shop.deliveryFee,
 					0
 				);
 			}
@@ -152,32 +170,32 @@
 
 			// 去支付
 			async gotoPay(totalPrice) {
-			  try {
-			    // 第一个弹窗
-			    const firstResult = await this.$refs.modalQueue.showModal({
-			      title: '支付提示',
-			      content: `支付降解时间：${totalPrice}年`,
-			      confirmText: '下一步',
-			      cancelText: '取消支付',
-			      confirmColor: '#f7931e'
-			    });
-			    
-			    // 第二个弹窗（只有第一个弹窗确认后才会执行）
-			    const secondResult = await this.$refs.modalQueue.showModal({
-			      title: '贷款确认',
-			      content: `您的余额不足！<br>推荐您使用贷款：<br>是否向地球贷款${totalPrice}年？`,
-			      confirmText: '立即贷款',
-			      cancelText: '放弃支付',
-			      confirmColor: '#f7931e'
-			    });
-			    
-			    // 两个弹窗都确认后的逻辑
-			    console.log('用户确认贷款并支付');
-			    this.onConfirm();
-			    
-			  } catch (error) {
-			    // 用户取消支付
-			  }
+				try {
+					// 第一个弹窗
+					const firstResult = await this.$refs.modalQueue.showModal({
+						title: '支付提示',
+						content: `支付降解时间：${totalPrice}年`,
+						confirmText: '下一步',
+						cancelText: '取消支付',
+						confirmColor: '#f7931e'
+					});
+
+					// 第二个弹窗（只有第一个弹窗确认后才会执行）
+					const secondResult = await this.$refs.modalQueue.showModal({
+						title: '贷款确认',
+						content: `您的余额不足！<br>推荐您使用贷款：<br>是否向地球贷款${totalPrice}年？`,
+						confirmText: '立即贷款',
+						cancelText: '放弃支付',
+						confirmColor: '#f7931e'
+					});
+
+					// 两个弹窗都确认后的逻辑
+					console.log('用户确认贷款并支付');
+					this.onConfirm();
+
+				} catch (error) {
+					// 用户取消支付
+				}
 			},
 			onConfirm() {
 				uni.showModal({
@@ -215,7 +233,7 @@
 		flex-direction: column;
 		background-color: #f5f5f5;
 
-		padding: 20rpx;
+		padding: 24rpx 20rpx;
 	}
 
 	.empty-cart {
@@ -258,7 +276,7 @@
 		background-color: white;
 		border-radius: 16rpx;
 		overflow: hidden;
-		margin-bottom: 20rpx;
+		margin-bottom: 24rpx;
 	}
 
 	.shop-header {
@@ -287,7 +305,7 @@
 	}
 
 	.food-list {
-		padding: 20rpx;
+		padding: 0 20rpx;
 	}
 
 	.food-item {
@@ -306,16 +324,24 @@
 
 	.food-info {
 		flex: 1;
+
+		height: 120rpx;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 
 	.food-name {
-		font-size: 30rpx;
+		line-height: 32rpx;
+		font-size: 28rpx;
+		font-weight: bold;
 		color: #333;
 		margin-bottom: 10rpx;
 	}
 
 	.food-price {
 		font-size: 32rpx;
+		font-weight: bold;
 		color: #FF5A5F;
 	}
 
@@ -328,7 +354,7 @@
 	.food-count {
 		display: flex;
 		align-items: center;
-		margin-right: 20rpx;
+		margin-right: 5rpx;
 	}
 
 	.delete-btn {
@@ -336,31 +362,74 @@
 		color: #999;
 	}
 
+	.content {
+		display: flex;
+	}
+
+	.content-left {
+		flex: 1;
+		display: flex;
+		align-items: center;
+	}
+
+	.content-right {
+		flex: 0 0 210rpx;
+		width: 210rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
 	.bottom-bar {
 		position: fixed;
 		/* 关键修改：使用CSS变量动态适配tabBar高度 */
-		bottom: calc(var(--window-bottom, 0) + 10rpx);
+		bottom: var(--window-bottom, 0);
 		left: 0;
 		right: 0;
 		height: 100rpx;
-		margin: 0 10rpx;
-		padding: 0 30rpx;
-		background-color: white;
-		box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
-		z-index: 999;
+		/* margin: 0 10rpx; */
+		/* padding: 0 30rpx; */
+		background-color: #fff;
+		box-shadow: 0 -2rpx 6rpx rgba(0, 0, 0, 0.1);
 		/* 确保层级高于tabBar */
+		z-index: 999;
+	}
+
+	.total-price-wrapper {
+		flex: 1;
+		height: 100%;
+		
+		display: flex;
+		flex-direction: column;
+		padding: 0 20rpx;
 	}
 
 	.total-price {
-		font-size: 36rpx;
 		color: #FF5A5F;
+		display: inline-block;
+		vertical-align: top;
+		margin: 14rpx 0 8rpx;
+		font-weight: bold;
+		font-size: 40rpx;
+		line-height: 40rpx;
+	}
+	
+	.total-delivery-fee {
+		display: inline-block;
+		vertical-align: top;
+		line-height: 24rpx;
+		font-size: 24rpx;
+		color: #999;
 	}
 
 	.pay-btn {
-		background-color: #FF5A5F;
-		color: white;
-		width: 300rpx;
-		padding: 0 40rpx;
-		border-radius: 40rpx;
+		width: 100%;
+		height: 100%;
+		line-height: 100rpx;
+		text-align: center;
+		font-weight: 700;
+		font-size: 28rpx;
+		background: #f7931e;
+		color: #fff;
 	}
 </style>

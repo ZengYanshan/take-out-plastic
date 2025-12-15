@@ -1,11 +1,12 @@
 <template>
 	<view class="shop-detail">
 		<view class="status-bar" style="height: var(--status-bar-height); width: 100%;" />
-<!-- 		<view class="custom-navbar">
-			<image src="/static/images/icon-back.png" class="back-icon" @click="goBack" />
-			<text class="page-title">{{ shop.name }}</text>
-		</view> -->
+		
 		<view class="main-container">
+			<view class="custom-navbar">
+				<image src="/static/images/icon-back.png" class="back-icon" @click="goBack" />
+			</view>
+			
 			<shop-header :shop="shop" />
 
 			<!-- <view class="tab-wrapper">
@@ -90,17 +91,15 @@
 	}
 
 	.custom-navbar {
-		display: flex;
-		align-items: center;
-		padding: 15rpx 30rpx;
-		background-color: #f7931e;
-		color: white;
+		width: 100%;
+		padding: 10rpx 20rpx 0;
+		background-color: #fff;
 	}
 
 	.back-icon,
 	.action-icon {
-		width: 44rpx;
-		height: 44rpx;
+		width: 20rpx;
+		height: 20rpx;
 	}
 
 	.main-container {
@@ -112,7 +111,7 @@
 	
 	.food-list-wrapper {
 		flex: 1;
-		height: calc(100vh - 178px);
+		height: calc(100vh - 208px);
 		/* position: fixed; */
 		/* top: 256rpx; */
 		/* left: 0;

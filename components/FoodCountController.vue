@@ -56,20 +56,22 @@
 		align-items: center;
 		justify-content: center;
 		border-radius: 50%;
-		background: #0091ff;
+		background: #f7931e;
 		color: white;
 		font-size: 40rpx;
 	}
 
 	.cart-count {
-		min-width: 60rpx;
+		min-width: 28rpx;
 		text-align: center;
 		font-size: 28rpx;
-		color: #333;
+		color: #666;
 		margin: 0 20rpx;
 	}
 
 	.icon {
 		font-weight: bold;
+		font-size: 32rpx;
+		line-height: 32rpx;
 	}
 </style>

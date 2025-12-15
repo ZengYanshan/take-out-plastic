@@ -18,11 +18,14 @@
 					</view>
 				</view>
 				<!-- 总价 -->
-				<text class="price" :class="{'highlight': totalPrice > 0}">
-					{{ totalPrice }}年
-				</text>
-				<!-- 配送费 -->
-				<text class="desc">包装降解另需{{ deliveryFee }}年</text>
+				<view class="total-price-wrapper">
+					<text class="price" :class="{'highlight': totalPrice > 0}">
+						{{ totalPrice }}年
+					</text>
+					<!-- 配送费 -->
+					<text class="delivery-fee">包装降解另需{{ deliveryFee }}年</text>
+				</view>
+				
 			</view>
 			<!-- 支付按钮 -->
 			<view class="content-right" @click.stop="pay">
@@ -267,28 +270,35 @@
 		right: 2rpx;
 		top: 2rpx;
 	}
+	
+	.total-price-wrapper {
+		flex: 1;
+		height: 100%;
+		
+		display: flex;
+		flex-direction: column;
+	}
 
 	.price {
 		display: inline-block;
 		vertical-align: top;
-		margin-top: 24rpx;
-		line-height: 48rpx;
+		margin: 12rpx 0 8rpx;
 		padding-right: 24rpx;
 		box-sizing: border-box;
 		border-right: 1px solid rgba(255, 255, 255, 0.1);
-		font-weight: 700;
-		font-size: 32rpx;
+		font-weight: bold;
+		font-size: 40rpx;
+		line-height: 40rpx;
 	}
 
 	.price.highlight {
 		color: #FF5A5F;
 	}
 
-	.desc {
+	.delivery-fee {
 		display: inline-block;
 		vertical-align: top;
-		margin: 24rpx 0 0 24rpx;
-		line-height: 48rpx;
+		line-height: 24rpx;
 		font-size: 24rpx;
 	}
 
