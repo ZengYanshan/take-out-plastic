@@ -44,7 +44,7 @@
 			</view>
 		</scroll-view>
 
-		<!-- 底部结算栏 -->
+		<!-- 底部支付栏 -->
 		<view v-if="groupedCart.length > 0" class="bottom-bar content">
 			<view class="content-left">
 				<!-- 总价 -->
@@ -53,7 +53,7 @@
 						{{ totalPrice }}年
 					</text>
 					<!-- 配送费 -->
-					<text class="total-delivery-fee">包装降解另需{{ totalDeliveryFee }}年</text>
+					<text class="total-delivery-fee">外包装降解另需{{ totalDeliveryFee }}年</text>
 				</view>
 				<!-- <text class="total-price-row">总降解时间: <text class="total-price">{{ totalPrice }}年</text></text> -->
 			</view>
@@ -200,8 +200,15 @@
 			onConfirm() {
 				uni.showModal({
 					title: '系统提示',
-					content: '贷款并不会真的发生，因为这不是现实世界的外卖APP。',
-					confirmColor: "#f7931e"
+					content: '贷款申请未能通过：您的偿还能力不足。',
+					confirmColor: "#f7931e",
+					success: function(res) {
+						uni.showModal({
+							title: '系统提示',
+							content: '贷款申请无需通过：此应用并非真实外卖APP，不产生真正的交易，不带来废弃外卖包装。',
+							confirmColor: "#f7931e"
+						});
+					}
 				});
 			},
 		}
@@ -401,7 +408,7 @@
 		
 		display: flex;
 		flex-direction: column;
-		padding: 0 20rpx;
+		padding: 0 36rpx;
 	}
 
 	.total-price {

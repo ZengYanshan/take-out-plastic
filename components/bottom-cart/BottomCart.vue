@@ -23,7 +23,7 @@
 						{{ totalPrice }}年
 					</text>
 					<!-- 配送费 -->
-					<text class="delivery-fee">包装降解另需{{ deliveryFee }}年</text>
+					<text class="delivery-fee">外包装降解另需{{ deliveryFee }}年</text>
 				</view>
 				
 			</view>
@@ -116,7 +116,7 @@
 				if (this.totalPrice === 0) {
 					return `未选择`;
 				} else {
-					return '去结算';
+					return '去支付';
 				}
 			},
 			payClass() {

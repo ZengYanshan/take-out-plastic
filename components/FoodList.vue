@@ -37,9 +37,9 @@
 								<!-- <text v-if="food.oldPrice" class="old">¥{{ food.oldPrice }}</text> -->
 							</view>
 						</view>
-						
+
 					</view>
-					
+
 					<!-- 加减号 -->
 					<view class="food-count-controller-wrapper">
 						<food-count-controller @add='onAdd' @sub='onSub' :food='food' />
@@ -248,38 +248,45 @@
 				});
 			},
 			async onPay(totalPrice) {
-			  try {
-			    // 第一个弹窗
-			    const firstResult = await this.$refs.modalQueue.showModal({
-			      title: '支付提示',
-			      content: `支付降解时间：${totalPrice}年`,
-			      confirmText: '下一步',
-			      cancelText: '取消支付',
-			      confirmColor: '#f7931e'
-			    });
-			    
-			    // 第二个弹窗（只有第一个弹窗确认后才会执行）
-			    const secondResult = await this.$refs.modalQueue.showModal({
-			      title: '贷款确认',
-			      content: `您的余额不足！<br>推荐您使用贷款：<br>是否向地球贷款${totalPrice}年？`,
-			      confirmText: '立即贷款',
-			      cancelText: '放弃支付',
-			      confirmColor: '#f7931e'
-			    });
-			    
-			    // 两个弹窗都确认后的逻辑
-			    console.log('用户确认贷款并支付');
-			    this.onConfirm();
-			    
-			  } catch (error) {
-			    // 用户取消支付
-			  }
+				try {
+					// 第一个弹窗
+					const firstResult = await this.$refs.modalQueue.showModal({
+						title: '支付提示',
+						content: `支付降解时间：${totalPrice}年`,
+						confirmText: '下一步',
+						cancelText: '取消支付',
+						confirmColor: '#f7931e'
+					});
+
+					// 第二个弹窗（只有第一个弹窗确认后才会执行）
+					const secondResult = await this.$refs.modalQueue.showModal({
+						title: '贷款确认',
+						content: `您的余额不足！<br>推荐您使用贷款：<br>是否向地球贷款${totalPrice}年？`,
+						confirmText: '立即贷款',
+						cancelText: '放弃支付',
+						confirmColor: '#f7931e'
+					});
+
+					// 两个弹窗都确认后的逻辑
+					console.log('用户确认贷款并支付');
+					this.onConfirm();
+
+				} catch (error) {
+					// 用户取消支付
+				}
 			},
 			onConfirm() {
 				uni.showModal({
 					title: '系统提示',
-					content: '贷款并不会真的发生，因为这不是现实世界的外卖APP。',
-					confirmColor: "#f7931e"
+					content: '贷款申请未能通过：您的偿还能力不足。',
+					confirmColor: "#f7931e",
+					success: function(res) {
+						uni.showModal({
+							title: '系统提示',
+							content: '贷款申请无需通过：此应用并非真实外卖APP，不产生真正的交易，不带来废弃外卖包装。',
+							confirmColor: "#f7931e"
+						});
+					}
 				});
 			},
 			async onClear() {
@@ -365,7 +372,7 @@
 
 	.food-item .food-info {
 		flex: 1;
-		
+
 		height: 160rpx;
 		display: flex;
 		flex-direction: column;
