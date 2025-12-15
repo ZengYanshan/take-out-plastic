@@ -24,10 +24,10 @@
 								<text class="section-title">商品详情</text>
 							</view>
 							<!-- <text class="info-text">{{currentFood.description}}</text> -->
-							<uni-table class="info-table">
-								<uni-tr v-for="key in Object.keys(currentFood.description)" :key="key">
-									<uni-th>{{key}}</uni-th>
-									<uni-td>{{currentFood.description[key]}}</uni-td>
+							<uni-table class="description-table">
+								<uni-tr v-for="key in Object.keys(currentFood.description)" :key="key" class="description-tr">
+									<uni-th class="description-th">{{key}}</uni-th>
+									<uni-td class="description-td">{{currentFood.description[key]}}</uni-td>
 								</uni-tr>
 							</uni-table>
 						</view>
@@ -101,10 +101,12 @@
 		/* bottom 与 .add-to-cart-button 高度保持一致 */
 		bottom: 100rpx;
 		background: white;
-		border-top-left-radius: 10px;
+		border-top-left-radius: 16px;
 		/* 左上角圆角 */
-		border-top-right-radius: 10px;
+		border-top-right-radius: 16px;
 		/* 右上角圆角 */
+		
+		overflow: hidden;
 	}
 
 	/* 购物车列表出现、消失动画 */
@@ -129,10 +131,12 @@
 
 	.food-detail-wrapper {
 		flex: 1;
-		padding: 10rpx;
-		height: 60vh;
-		box-sizing: border-box;
+		/* padding: 10rpx; */
+		height: 70vh;
 		/* DEBUG 防止右溢出 */
+		box-sizing: border-box;
+		
+		background-color: #f5f5f5;
 	}
 
 	.food-detail-wrapper .image-section {
@@ -140,8 +144,7 @@
 		width: 100%;
 		padding-top: 100%;
 		/* 关键：创建1:1的正方形区域 */
-		margin-bottom: 40rpx;
-		border-radius: 16rpx;
+		margin-bottom: 0rpx;
 		overflow: hidden;
 	}
 
@@ -156,26 +159,26 @@
 
 	.info-section {
 		background: #fff;
-		padding: 10rpx 20rpx;
-		border-radius: 16rpx;
-		margin-bottom: 10rpx;
+		padding: 24rpx 40rpx;
+		/* border-radius: 16rpx; */
+		margin-bottom: 20rpx;
 	}
 
 	.food-name {
-		font-size: 40rpx;
+		font-size: 48rpx;
+		line-height: 68rpx;
 		font-weight: bold;
 		color: #333;
-		margin-bottom: 10rpx;
 	}
 
 	.price-row {
 		display: flex;
 		align-items: center;
-		margin-bottom: 10rpx;
 	}
 
 	.price {
-		font-size: 48rpx;
+		font-size: 64rpx;
+		line-height: 84rpx;
 		color: #e93b3b;
 		font-weight: bold;
 	}
@@ -183,9 +186,9 @@
 	.section-header {
 		display: flex;
 		align-items: center;
-		margin-bottom: 10rpx;
-		padding-bottom: 10rpx;
-		border-bottom: 1rpx solid #eee;
+		margin: 10rpx 0;
+		/* padding-bottom: 10rpx; */
+		/* border-bottom: 1rpx solid #eee; */
 	}
 
 	.section-title {
@@ -193,6 +196,22 @@
 		font-size: 32rpx;
 		font-weight: bold;
 		color: #333;
+	}
+	
+	.description-table {
+		table-layout: fixed;
+	}
+	.description-th,
+	.description-td {
+		padding: 4rpx;
+		border-bottom: none;
+		font-size: 28rpx;
+		color: #666;
+	}
+	.description-th
+	{
+		padding-right: 10rpx;
+		width: 75rpx;
 	}
 
 	.add-to-cart-button {
