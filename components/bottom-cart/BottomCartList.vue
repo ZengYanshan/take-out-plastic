@@ -8,7 +8,7 @@
 						<text class="clear" @tap="clear">清空</text>
 					</view>
 					<!-- 食物列表 -->
-					<scroll-view class="list-content" scroll-y enhanced="true" show-scrollbar="{{false}}" ref="listContent" :style="{maxHeight: '400rpx'}">
+					<scroll-view class="list-content" scroll-y enhanced="true" show-scrollbar="{{false}}" ref="listContent" :style="{maxHeight: '60vh'}">
 						<view v-for="(food, index) in selectedFoods" :key="index" @click="clickFood(food)" class="food">
 							<image class="img" :src="food.image" mode="aspectFill" />
 							<text class="name">{{food.name}}</text>
@@ -19,6 +19,8 @@
 								<food-count-controller @add="onAdd" @sub="onSub" :food="food"></food-count-controller>
 							</view>
 						</view>
+						
+						<view class="placeholder"></view>
 					</scroll-view>
 				</view>
 			</transition>
@@ -99,6 +101,8 @@
 		border-top-left-radius: 10px;    /* 左上角圆角 */
  		border-top-right-radius: 10px;   /* 右上角圆角 */
 		
+		overflow: hidden;
+		
 	}
 	/* 购物车列表出现、消失动画 */
 	.popup-content.move-enter-from,
@@ -117,24 +121,25 @@
 	.list-header {
 		height: 40rpx;
 		line-height: 40rpx;
-		padding: 0 18rpx;
+		padding: 20rpx 30rpx;
 		background: background-ssss;
 	}
 
 	.list-header .title {
 		float: left;
-		font-size: $fontsize-medium;
-		color: dark-grey;
+		font-size: 32rpx;
+		font-weight: bold;
+		color: #333;
 	}
 
 	.list-header .clear {
 		float: right;
-		font-size: $fontsize-small;
-		color: blue;
+		font-size: 28rpx;
+		color: #666;
 	}
 
 	.list-content {
-		padding: 0 18rpx;
+		padding: 0 30rpx;
 		overflow-y: auto;
 		box-sizing: border-box; /* DEBUG 防止右溢出 */
 	}
@@ -156,6 +161,9 @@
 		position: absolute;
 		/* 与 .list-content .food padding 保持一致 */
 		top: 12rpx;
+		line-height: 28rpx;
+		font-size: 28rpx;
+		font-weight: bold;
 	}
 
 	.list-content .food .price {
@@ -163,8 +171,10 @@
 		/* 与 .list-content .food .img width + margin-right 保持一致 */
 		left: 140rpx;
 		/* 与 .list-content .food padding 保持一致 */
-		bottom: 12rpx;
-		font-weight: 700;
+		bottom: 16rpx;
+		line-height: 36rpx;
+		font-size: 36rpx;
+		font-weight: bold;
 		color: red;
 	}
 
@@ -172,5 +182,11 @@
 		position: absolute;
 		right: 0rpx;
 		bottom: 12rpx;
+	}
+	
+	.placeholder {
+		width: 100%;
+		height: 20rpx;
+		background-color: transparent;
 	}
 </style>
