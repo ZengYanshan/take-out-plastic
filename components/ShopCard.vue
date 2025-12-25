@@ -16,7 +16,7 @@
 						{{ shop.deliveryTime }}外包装
 					</text>
 					<text class="delivery-fee">
-						{{ shop.deliveryFee === 0 ? '免外包装' : `外包装降解需${shop.deliveryFee}年` }}
+						{{ shop.deliveryFee === 0 ? '免外包装' : `降解需${shop.deliveryFee}年` }}
 					</text>
 				</view>
 

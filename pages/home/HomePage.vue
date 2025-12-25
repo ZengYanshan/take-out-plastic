@@ -48,15 +48,20 @@
 			return {
 				banners: [{
 						id: 1,
-						image: '/static/images/banner1.jpg',
-						shopId: 1,
-						foodId: 100
+						image: '/static/images/shop&food/banner/Cover1_QingHeStore.png',
+						shopId: 2
 					},
 					{
 						id: 2,
-						image: '/static/images/banner2.jpg',
+						image: '/static/images/shop&food/banner/Cover2_CornBox.png',
 						shopId: 2,
-						foodId: 202
+						foodId: 204
+					},
+					{
+						id: 3,
+						image: '/static/images/shop&food/banner/Cover3_PaperBag.png',
+						shopId: 1,
+						foodId: 100
 					}
 				],
 				// categories: [{

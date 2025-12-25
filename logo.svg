@@ -1,1 +1,39 @@
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1765806181511" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5353" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M204.8 471.01952l122.88-143.36L696.32 327.68l122.88 143.33952V819.2H204.82048z" fill="#f7931e" p-id="5354"></path><path d="M471.04 819.2V471.01952l-143.36-143.36V819.2" fill="#FFFFFF" opacity=".2" p-id="5355"></path><path d="M819.2 471.01952H471.04l-143.36-143.36L696.32 327.68l122.88 143.33952z" fill="#f8c080" p-id="5356"></path><path d="M327.68 327.68v-40.96a81.92 81.92 0 0 1 81.92-81.92h204.8a81.92 81.92 0 0 1 81.92 81.92v40.96" fill="#f9c488" p-id="5357"></path><path d="M471.04 471.01952h348.16V819.2H471.04z" fill="#f7cc9a" p-id="5358"></path><path d="M737.28 634.88H552.96a10.24 10.24 0 0 1 0-20.48h184.32a10.24 10.24 0 0 1 0 20.48z" fill="#ef8d1e" p-id="5359"></path></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_1" data-name="图层_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
+  <!-- Generator: Adobe Illustrator 29.2.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 116)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #f8c080;
+      }
+
+      .st1 {
+        fill: #ef8d1e;
+      }
+
+      .st2 {
+        fill: #fff;
+        isolation: isolate;
+        opacity: .2;
+      }
+
+      .st3 {
+        fill: #f7931e;
+      }
+
+      .st4 {
+        fill: #f7cc9a;
+      }
+
+      .st5 {
+        fill: #f9c488;
+      }
+    </style>
+  </defs>
+  <path class="st3" d="M20,89.3l32-37.3h96s32,37.3,32,37.3v90.7H20v-90.7Z"/>
+  <path class="st2" d="M89.3,180v-90.7l-37.3-37.3v128"/>
+  <path class="st0" d="M180,89.3h-90.7l-37.3-37.3h96s32,37.3,32,37.3Z"/>
+  <path class="st5" d="M52,52v-10.7c0-11.8,9.6-21.3,21.3-21.3h53.3c11.8,0,21.3,9.6,21.3,21.3v10.7"/>
+  <path class="st4" d="M89.3,89.3h90.7v90.7h-90.7v-90.7Z"/>
+  <path class="st1" d="M158.7,132h-48c-1.5,0-2.7-1.2-2.7-2.7,0-1.5,1.2-2.7,2.7-2.7h48c1.5,0,2.7,1.2,2.7,2.7,0,1.5-1.2,2.7-2.7,2.7Z"/>
+</svg>

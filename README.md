@@ -1,25 +1,10 @@
-### Todo List
-
-- [x] 商店列表显示代表食物：直接点击食物的跳转逻辑？
-- [x] 首页去掉小按钮
-- [x] 购物车和食物详情页的层级关系？
-- [x] 食物详情页增加“加入购物车”按钮
-- [x] 去除商店评论页
-- [ ] 食物详情页完善
-- [ ] “震撼美味”标签
-<!-- - [ ] 支付系统、订单系统 -->
-- [x] FoodList.vue currentCategory 问题
-<!-- - [ ] 小球动画 -->
-<!-- - [ ] “我的”页 -->
-- [x] 购物车页：商店-食物
-- [ ] 移动端动画问题
-- [ ] banner跳转
-<!-- - [ ] 搜索 -->
-
-
 ### 项目描述
 
-基于 uni-app 的外卖 APP 用户端，部署到 Android 手机。不做前后端分离，不联网，所有数据记录在本地。
+反转的外卖 APP 。
+
+客户端基于 uni-app 架构，部署到 Android 手机。不做前后端分离，不联网，所有数据记录在本地。
+
+> 包名：org.zyszcc.takeoutplastic
 
 ### 项目结构
 
@@ -27,54 +12,40 @@
 src/
 ├── pages/                  # 页面目录（按功能模块划分）
 │   ├── home/               # 首页相关
-│   │   ├── HomePage.vue    # 首页
-│   │   └── ShopListPage.vue # 商家列表页
+│   │   └── HomePage.vue    # 首页
 │   ├── shop/               # 商家相关
 │   │   └── ShopDetailPage.vue # 商家详情页
-│   ├── cart/               # 购物车与订单
-│   │   ├── CartPage.vue    # 购物车页
-│   │   ├── OrderConfirmPage.vue # 确认订单页
-│   │   ├── OrderListPage.vue # 订单列表页
-│   │   └── OrderDetailPage.vue # 订单详情页
-│   └── profile/            # 个人中心
-│       ├── ProfilePage.vue # 个人中心页
-│       └── AddressEditPage.vue # 地址编辑页
+│   └── cart/               # 购物车与订单
+│   │   └── CartPage.vue    # 购物车页
 ├── components/             # 公共组件
 │   ├── bottom-cart/        # 底部购物车相关
 │   │   ├── BottomCart.vue  # 底部购物车
 │   │   └── BottomCartList.vue # 底部购物车内部列表
-│   └── FoodCountController.vue # 商品加减按钮组件
-│   ├── ShopHeader.vue      # 商家Header组件
+│   ├── FoodCountController.vue # 商品加减按钮组件
+│   ├── ShopHeader.vue      # 商家信息组件
 │   ├── Tab.vue             # 滑动切换组件
-│   ├── FoodList.vue        # 菜品列表组件
+│   ├── FoodList.vue        # 外卖列表组件
 │   ├── CommentList.vue     # 评论列表组件
 │   ├── ShopCard.vue        # 商家卡片组件
 │   ├── FoodCard.vue        # 菜品卡片组件
-│   ├── CartItem.vue        # 购物车商品项
-│   └── OrderItem.vue       # 订单项组件
+│   └── Bubble.vue          # 数字气泡组件
 ├── static/                 # 静态资源（图片、JSON数据）
 │   ├── images/             # 图片资源
-│   │   ├── logo.png        # 应用Logo
-│   │   └── kfc.jpg         # 商家图片
+│   │   ├── icon            # 图标
+│   │   └── shop&food       # 商家、外卖图片
 │   └── data/               # 模拟数据（JSON）
 │       ├── shops.js        # 商家数据
-│       └── foods.js        # 菜品数据
+│       └── foods.js        # 外卖数据
 ├── store/                  # Vuex状态管理（模拟数据持久化）
 │   ├── index.js            # Vuex主文件
 │   ├── mutation-types.js   # mutation类型
 │   ├── modules/            # 模块划分
-│   │   ├── user.js         # 用户信息
-│   │   ├── cart.js         # 购物车数据
-│   │   └── order.js        # 订单数据
+│   │   └── cart.js         # 购物车数据
 ├── App.vue                 # 应用根组件
 └── main.js                 # 应用入口文件
 ```
 
-### 代码
-
-#### static
-
-##### data
+### 数据格式
 
 shops.js
 

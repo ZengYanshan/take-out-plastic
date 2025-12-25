@@ -4,7 +4,7 @@
 		
 		<view class="main-container">
 			<view class="custom-navbar">
-				<image src="/static/images/icon-back.png" class="back-icon" @click="goBack" />
+				<image src="/static/images/icon/back.png" class="back-icon" @click="goBack" />
 			</view>
 			
 			<shop-header :shop="shop" />

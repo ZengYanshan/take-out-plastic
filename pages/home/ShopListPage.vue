@@ -2,7 +2,7 @@
 	<view class="shop-list-page">
 		<!-- 自定义导航栏 
 		<view class="custom-navbar">
-			<image src="/static/images/icon-back.png" class="back-icon" @click="goBack" />
+			<image src="/static/images/icon/back.png" class="back-icon" @click="goBack" />
 			<text class="page-title">商家列表</text>
 		</view>-->
 

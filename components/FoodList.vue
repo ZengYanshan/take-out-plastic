@@ -280,13 +280,13 @@
 					title: '系统提示',
 					content: '贷款申请未能通过：您的偿还能力不足。',
 					confirmColor: "#f7931e",
-					success: function(res) {
-						uni.showModal({
-							title: '系统提示',
-							content: '贷款申请无需通过：此应用并非真实外卖APP，不产生真正的交易，不带来废弃外卖包装。',
-							confirmColor: "#f7931e"
-						});
-					}
+					// success: function(res) {
+					// 	uni.showModal({
+					// 		title: '系统提示',
+					// 		content: '贷款申请无需通过：此应用并非真实外卖APP，不产生真正的交易，不带来废弃外卖包装。',
+					// 		confirmColor: "#f7931e"
+					// 	});
+					// }
 				});
 			},
 			async onClear() {
